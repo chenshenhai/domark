@@ -12,8 +12,8 @@
   "scripts": {
     "build": "rollup -c ./scripts/rollup.config.prod.js",
     "build:wasm": "wasm-pack build --target web",
-    "build:c": "node ./scripts/compile.js",
-    "dev": "npm run build:wasm && rollup -w -c ./scripts/rollup.config.dev.js",
+    "build:compile": "node ./scripts/compile.js",
+    "dev": "npm run build:wasm && npm run build:compile && rollup -w -c ./scripts/rollup.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
