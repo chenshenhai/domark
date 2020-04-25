@@ -18,7 +18,7 @@ module.exports = [
     plugins: [
       json(),
       typescript(),
-      buble(),
+      // buble(),
     ],
   },
 ]

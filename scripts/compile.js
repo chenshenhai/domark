@@ -44,13 +44,48 @@ function rewriteFile(filePath, content) {
   fs.writeFileSync(filePath, content)
 }
 
-async function main() {
+async function compileWasmScript() {
+  // init WASM Uint8Array
   const wasmPath = path.join(__dirname, '..', 'pkg', 'domark_bg.wasm');
   const buf = await readWasmFileAsync(wasmPath);
   const u8 = bufferToArray(buf);
-  const wasmJsonPath = path.join(__dirname, '..', 'pkg', 'wasm_u8.json');
-  const content = JSON.stringify(u8);
-  rewriteFile(wasmJsonPath, content);
+  const wasmUint8ArrayCode = JSON.stringify(u8);
+
+  // init entry script
+  const wasmScriptPath = path.join(__dirname, '..', 'pkg', 'domark.js');
+  let content = fs.readFileSync(wasmScriptPath, 'utf-8');
+  content = content.replace('async function load(module, imports) {', `
+async function load(module, imports) {
+  const bytes = await module.arrayBuffer();
+  return await WebAssembly.instantiate(bytes, imports);
+}
+
+async function __load(module, imports) {  
+`);
+  content = content.replace('async function init(input) {', `
+async function init(input) {
+  function fetch() {
+    const buffer = new Uint8Array(${wasmUint8ArrayCode});
+    const response = {
+      arrayBuffer() {
+        return buffer;
+      }
+    }
+    return response;
+  }
+  `);
+  return content;
+}
+
+async function main() {
+  const script = await compileWasmScript()
+  let scriptPath = path.join(__dirname, '..', 'pkg', 'wasm-entry.js');
+  rewriteFile(scriptPath, script);
+
+  let typePath = path.join(__dirname, '..', 'pkg', 'domark.d.ts');
+  let typeContent = fs.readFileSync(typePath);
+  let typeScriptPath = path.join(__dirname, '..', 'pkg', 'wasm-entry.d.ts');
+  rewriteFile(typeScriptPath, typeContent);
 }
 
 main()
