@@ -4,8 +4,9 @@
   </head>
   <body>
     <div>hello my_wasm</div>
+    <script src="./../dist/index.js"></script>
     <script type="module">
-      import init, { greet } from "./pkg/my_wasm.js";
+      import init, { greet } from "./../pkg/domark.js";
       async function main() {
         await init();
         greet();

@@ -10,6 +10,8 @@
     "test": "tests"
   },
   "scripts": {
+    "build": "rollup -c ./scripts/rollup.config.prod.js",
+    "dev": "rollup -w -c ./scripts/rollup.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +26,14 @@
   "bugs": {
     "url": "https://github.com/chenshenhai/domark/issues"
   },
-  "homepage": "https://github.com/chenshenhai/domark#readme"
+  "homepage": "https://github.com/chenshenhai/domark#readme",
+  "devDependencies": {
+    "rollup": "^2.7.2",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
 }

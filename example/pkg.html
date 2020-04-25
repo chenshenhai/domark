@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>my_wasm</title>
+  </head>
+  <body>
+    <div>hello my_wasm</div>
+    <script type="module">
+      import init, { greet } from "./pkg/domark.js";
+      async function main() {
+        await init();
+        greet();
+      }
+      main();
+    </script>
+  </body>
+</html>
