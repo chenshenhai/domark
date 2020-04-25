@@ -1,9 +1,9 @@
 
-import init, { greet } from './../pkg/wasm-entry';
+import init, { start } from './../pkg/wasm-entry';
 
 async function main() {
   await init();
-  greet();
+  start('canvas');
 }
 
 main();
