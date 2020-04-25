@@ -11,7 +11,9 @@
   },
   "scripts": {
     "build": "rollup -c ./scripts/rollup.config.prod.js",
-    "dev": "rollup -w -c ./scripts/rollup.config.dev.js",
+    "build:wasm": "wasm-pack build --target web",
+    "build:c": "node ./scripts/compile.js",
+    "dev": "npm run build:wasm && rollup -w -c ./scripts/rollup.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +30,7 @@
   },
   "homepage": "https://github.com/chenshenhai/domark#readme",
   "devDependencies": {
+    "@rollup/plugin-json": "^4.0.3",
     "rollup": "^2.7.2",
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-serve": "^1.0.1",

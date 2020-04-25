@@ -1,6 +1,7 @@
 const path = require('path');
 const buble = require('rollup-plugin-buble'); 
 const typescript = require('rollup-plugin-typescript');
+const json = require('@rollup/plugin-json');
 
 const resolveFile = function(filePath) {
   return path.join(__dirname, '..', filePath)
@@ -15,6 +16,7 @@ module.exports = [
       name: 'domark',
     }, 
     plugins: [
+      json(),
       typescript(),
       buble(),
     ],
