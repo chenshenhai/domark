@@ -1,11 +1,12 @@
+import { TypeDomarkOptions } from './type';
 
-import init, { start } from './../pkg/wasm-entry';
-
-async function main() {
-  await init();
-  start('canvas');
+/**
+ * @param html 
+ * @param opts 
+ * @return {string} image base64
+ */
+function domark(html: string, opts: TypeDomarkOptions): string {
+  return html;
 }
 
-main();
-
-// console.log('i am ts', wasm)
+export default domark;
