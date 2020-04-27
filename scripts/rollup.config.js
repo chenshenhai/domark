@@ -9,6 +9,18 @@ const resolveFile = function(filePath) {
 
 module.exports = [
   {
+    input: resolveFile('typescript/wasm.ts'),
+    output: {
+      file: resolveFile('dist/wasm.js'),
+      format: 'iife',
+      name: 'domark',
+    }, 
+    plugins: [
+      json(),
+      typescript(),
+    ],
+  },
+  {
     input: resolveFile('typescript/index.ts'),
     output: {
       file: resolveFile('dist/index.js'),
@@ -18,7 +30,6 @@ module.exports = [
     plugins: [
       json(),
       typescript(),
-      // buble(),
     ],
   },
 ]
