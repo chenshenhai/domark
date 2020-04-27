@@ -1,4 +1,5 @@
 import { TypeDomarkOptions } from './type';
+import { parseHtmlToSvg } from './lib/svg';
 
 /**
  * @param html 
@@ -6,7 +7,8 @@ import { TypeDomarkOptions } from './type';
  * @return {string} image base64
  */
 function domark(html: string, opts: TypeDomarkOptions): string {
-  return html;
+  const base64 = parseHtmlToSvg(html);
+  return base64;
 }
 
 export default domark;
